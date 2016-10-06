@@ -1,7 +1,7 @@
 import getValue from './getValue'
 import isReactNative from '../isReactNative'
 
-const createOnChange = (change, { parse, normalize } = {}) =>
+const createOnChange = (change, { after, parse, normalize } = {}) =>
   event => {
     // read value from input
     let value = getValue(event, isReactNative)
@@ -18,6 +18,11 @@ const createOnChange = (change, { parse, normalize } = {}) =>
 
     // dispatch change action
     change(value)
+
+  // call after callback
+  if (after) {
+    after(value)
+  }
   }
 
 export default createOnChange

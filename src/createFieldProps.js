@@ -48,7 +48,8 @@ const createFieldProps = (getIn, name,
   const boundChange = value => dispatch(change(name, value))
   const onChange = createOnChange(boundChange, {
     normalize: boundNormalize,
-    parse: boundParse
+    parse: boundParse,
+    after: asyncValidate.bind(null, name)
   })
   const fieldValue = value == null ? '' : value
 

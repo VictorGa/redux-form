@@ -239,6 +239,7 @@ const createReduxForm =
 
           asyncValidate(name, value) {
             const {
+              asyncFields,
               asyncBlurFields,
               asyncErrors,
               asyncValidate,
@@ -257,7 +258,9 @@ const createReduxForm =
               const syncValidationPasses = submitting || !getIn(syncErrors, name)
               const isBlurredField = !submitting &&
                 (!asyncBlurFields || ~asyncBlurFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')))
-              if ((isBlurredField || submitting) && shouldAsyncValidate({
+              const isAsyncField = !submitting &&
+                (!asyncFields || ~asyncFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')))
+              if ((isBlurredField || submitting) || (isAsyncField || submitting) && shouldAsyncValidate({
                 asyncErrors,
                 initialized,
                 trigger: submitting ? 'submit' : 'blur',
