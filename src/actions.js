@@ -57,7 +57,7 @@ export const blur = (form, field, value, touch) =>
   ({ type: BLUR, meta: { form, field, touch }, payload: value })
 
 export const change = (form, field, value, touch, persistentSubmitErrors) =>
-  ({ type: CHANGE, meta: { form, field, touch, persistentSubmitErrors }, payload: value })
+  ({ type: CHANGE, meta: { form, field, touch }, payload: value })
 
 export const destroy = (form) =>
   ({ type: DESTROY, meta: { form } })
