@@ -49,7 +49,7 @@ const createFieldProps = (getIn, name,
   const onChange = createOnChange(boundChange, {
     normalize: boundNormalize,
     parse: boundParse,
-    after: asyncValidate.bind(null, name)
+    after: asyncValidate.bind(null, name, 'change')
   })
   const fieldValue = value == null ? '' : value
 
@@ -59,7 +59,7 @@ const createFieldProps = (getIn, name,
       onBlur: createOnBlur(value => dispatch(blur(name, value)), {
         normalize: boundNormalize,
         parse: boundParse,
-        after: asyncValidate.bind(null, name)
+        after: asyncValidate.bind(null, name, 'blur')
       }),
       onChange,
       onDragStart: createOnDragStart(name, fieldValue),

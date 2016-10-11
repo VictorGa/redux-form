@@ -63,6 +63,7 @@ const propsToNotUpdateFor = [
   'registeredFields'
 ]
 
+
 const checkSubmit = submit => {
   if (!submit || typeof submit !== 'function') {
     throw new Error('You must either pass handleSubmit() an onSubmit function or pass onSubmit as a prop')
@@ -237,7 +238,7 @@ const createReduxForm =
             return this.props.registeredFields.map((field) => getIn(field, 'name'))
           }
 
-          asyncValidate(name, value) {
+          asyncValidate(name, value, type = 'blur') {
             const {
               asyncFields,
               asyncBlurFields,
@@ -256,9 +257,9 @@ const createReduxForm =
             if (asyncValidate) {
               const valuesToValidate = submitting ? values : setIn(values, name, value)
               const syncValidationPasses = submitting || !getIn(syncErrors, name)
-              const isBlurredField = !submitting &&
+              const isBlurredField = !submitting && type === 'blur' &&
                 (!asyncBlurFields || ~asyncBlurFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')))
-              const isAsyncField = !submitting &&
+              const isAsyncField = !submitting && type === 'change' &&
                 (!asyncFields || ~asyncFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')))
               if ((isBlurredField || submitting) || (isAsyncField || submitting) && shouldAsyncValidate({
                 asyncErrors,

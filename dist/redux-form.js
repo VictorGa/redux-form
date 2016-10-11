@@ -785,7 +785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var onChange = (0, _createOnChange2.default)(boundChange, {
 	    normalize: boundNormalize,
 	    parse: boundParse,
-	    after: asyncValidate.bind(null, name)
+	    after: asyncValidate.bind(null, name, 'change')
 	  });
 	  var fieldValue = value == null ? '' : value;
 
@@ -797,7 +797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, {
 	        normalize: boundNormalize,
 	        parse: boundParse,
-	        after: asyncValidate.bind(null, name)
+	        after: asyncValidate.bind(null, name, 'blur')
 	      }),
 	      onChange: onChange,
 	      onDragStart: (0, _createOnDragStart2.default)(name, fieldValue),
@@ -3804,6 +3804,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          value: function asyncValidate(name, value) {
 	            var _this4 = this;
 
+	            var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'blur';
 	            var _props6 = this.props;
 	            var asyncFields = _props6.asyncFields;
 	            var asyncBlurFields = _props6.asyncBlurFields;
@@ -3823,8 +3824,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	              var _ret = function () {
 	                var valuesToValidate = submitting ? values : setIn(values, name, value);
 	                var syncValidationPasses = submitting || !getIn(syncErrors, name);
-	                var isBlurredField = !submitting && (!asyncBlurFields || ~asyncBlurFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')));
-	                var isAsyncField = !submitting && (!asyncFields || ~asyncFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')));
+	                var isBlurredField = !submitting && type === 'blur' && (!asyncBlurFields || ~asyncBlurFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')));
+	                var isAsyncField = !submitting && type === 'change' && (!asyncFields || ~asyncFields.indexOf(name.replace(/\[[0-9]+\]/g, '[]')));
 	                if (isBlurredField || submitting || (isAsyncField || submitting) && shouldAsyncValidate({
 	                  asyncErrors: asyncErrors,
 	                  initialized: initialized,
