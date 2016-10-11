@@ -22,7 +22,7 @@ const createOnBlur =
 
       // call after callback
       if (after) {
-        after(value)
+        after(value, 'blur')
       }
     }
 

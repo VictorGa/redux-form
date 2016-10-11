@@ -10,12 +10,11 @@
   },
   "scripts": {
     "build": "npm run build:lib && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "build:lib": "cross-env NODE_ENV=production babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:lib": "cross-env NODE_ENV=production babel src --out-dir lib",
     "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/redux-form.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/redux-form.min.js",
     "clean": "rimraf dist lib",
-    "lint": "eslint src",
     "example": "npm --prefix ./examples/$form install && npm --prefix ./examples/$form start",
     "example:asyncValidation": "form=asyncValidation npm run example",
     "example:fieldArrays": "form=fieldArrays npm run example",
@@ -29,21 +28,22 @@
     "example:submitValidation": "form=submitValidation npm run example",
     "example:syncValidation": "form=syncValidation npm run example",
     "example:wizard": "form=wizard npm run example",
+    "lint": "eslint src",
     "prepublish": "npm run test && npm run clean && npm run build",
     "test": "mocha --compilers js:babel-register --recursive --recursive \"src/**/__tests__/*\" --require src/__tests__/setup.js",
-    "test:watch": "npm test -- --watch",
+    "test:codecov": "cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
     "test:cov": "nyc --reporter=lcov --reporter=text npm test",
-    "test:codecov": "cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js"
+    "test:watch": "npm test -- --watch"
   },
   "keywords": [
-    "react",
-    "reactjs",
+    "decorator",
     "flux",
-    "redux",
-    "react-redux",
-    "redux-form",
     "form",
-    "decorator"
+    "react",
+    "react-redux",
+    "reactjs",
+    "redux",
+    "redux-form"
   ],
   "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
   "license": "MIT",
@@ -106,10 +106,10 @@
   },
   "files": [
     "README.md",
-    "es",
-    "lib",
     "dist",
-    "immutable.js"
+    "es",
+    "immutable.js",
+    "lib"
   ],
   "npmName": "redux-form",
   "npmFileMap": [

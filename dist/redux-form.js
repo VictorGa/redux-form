@@ -785,7 +785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var onChange = (0, _createOnChange2.default)(boundChange, {
 	    normalize: boundNormalize,
 	    parse: boundParse,
-	    after: asyncValidate.bind(null, name, 'change')
+	    after: asyncValidate.bind(null, name)
 	  });
 	  var fieldValue = value == null ? '' : value;
 
@@ -797,7 +797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, {
 	        normalize: boundNormalize,
 	        parse: boundParse,
-	        after: asyncValidate.bind(null, name, 'blur')
+	        after: asyncValidate.bind(null, name)
 	      }),
 	      onChange: onChange,
 	      onDragStart: (0, _createOnDragStart2.default)(name, fieldValue),
@@ -2569,7 +2569,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // call after callback
 	    if (after) {
-	      after(value);
+	      after(value, 'blur');
 	    }
 	  };
 	};
@@ -2596,6 +2596,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var timer = 0;
+
 	var createOnChange = function createOnChange(change) {
 	  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -2621,7 +2623,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // call after callback
 	    if (after) {
-	      after(value);
+	      clearTimeout(timer);
+	      timer = setTimeout(function () {
+	        after(value, 'change');
+	      }, 50);
 	    }
 	  };
 	};

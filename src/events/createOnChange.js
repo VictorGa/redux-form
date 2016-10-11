@@ -1,6 +1,8 @@
 import getValue from './getValue'
 import isReactNative from '../isReactNative'
 
+let timer = 0;
+
 const createOnChange = (change, { after, parse, normalize } = {}) =>
   event => {
     // read value from input
@@ -21,7 +23,10 @@ const createOnChange = (change, { after, parse, normalize } = {}) =>
 
   // call after callback
   if (after) {
-    after(value)
+    clearTimeout(timer);
+    timer = setTimeout(()=>{
+      after(value, 'change');
+    }, 300);
   }
   }
 
