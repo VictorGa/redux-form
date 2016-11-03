@@ -2626,7 +2626,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      clearTimeout(timer);
 	      timer = setTimeout(function () {
 	        after(value, 'change');
-	      }, 50);
+	      }, 300);
 	    }
 	  };
 	};
@@ -3976,6 +3976,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              invalid: invalid,
 	              pristine: pristine,
 	              reset: reset,
+	              syncErrors: syncErrors,
 	              submitting: submitting,
 	              submitFailed: submitFailed,
 	              submitSucceeded: submitSucceeded,

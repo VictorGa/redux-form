@@ -396,6 +396,7 @@ const createReduxForm =
               invalid,
               pristine,
               reset,
+              syncErrors,
               submitting,
               submitFailed,
               submitSucceeded,
